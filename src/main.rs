@@ -1,12 +1,13 @@
 use std::env;
 
-use actix_web::{web::{self, get}, App, HttpResponse, HttpServer};
+use actix_web::{web::{self}, App, HttpServer};
 use dotenvy::dotenv;
 use log::info;
 use sea_orm::Database;
 
 mod routes;
 mod handlers;
+mod entities;
 
 #[actix_web::main]
 async  fn main() {
@@ -25,7 +26,7 @@ async  fn main() {
         App::new()
         .app_data(web::Data::new(db.clone()))
         .configure(routes::init_routes)
-        
+        .default_service(web::to(handlers::not_found))
     })
     .bind(("0.0.0.0", port))
     .unwrap()
