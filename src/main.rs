@@ -1,6 +1,6 @@
 use std::env;
 
-use actix_web::{web, App, HttpResponse, HttpServer};
+use actix_web::{App, HttpServer};
 use dotenvy::dotenv;
 use log::info;
 
